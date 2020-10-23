@@ -25,7 +25,8 @@ const FunctionsList = {
   ['subt']: [(a, b) => { return subt(a, b) }, { args: 2 }],
   ['soma']: [(a, b) => { return soma(a, b) }, { args: 2 }],
   ['divi']: [(a, b) => { return divi(a, b) }, { args: 2 }],
-  ['exp']: [(a) => { return exp(a) }, { args: 2 }]
+  ['exp']: [(a) => { return exp(a) }, { args: 2 }],
+  ['expo']: [(a,b) => { return pow(a,b) }, { args: 2 }]
 };
 
 const operatorsFunction = {
@@ -272,19 +273,24 @@ const reverPolish = (postfix) => {
 
       switch (elem) {
         case '+':
-          stack.push(parseInt(a) + parseInt(b));
+          //stack.push(parseInt(a) + parseInt(b));
+          stack.push(`soma(${a},${b})`);
           break;
         case '-':
-          stack.push(parseInt(a) - parseInt(b));
+          //stack.push(parseInt(a) - parseInt(b));
+          stack.push(`subt(${a},${b})`);
           break;
         case '*':
-          stack.push(parseInt(a) * parseInt(b));
+          //stack.push(parseInt(a) * parseInt(b));
+          stack.push(`mult(${a},${b})`);
           break;
         case '/':
-          stack.push(parseInt(a) / parseInt(b));
+          //stack.push(parseInt(a) / parseInt(b));
+          stack.push(`divi(${a},${b})`);
           break;
         case '^':
-          stack.push(Math.pow(parseInt(b), parseInt(a)));
+          //stack.push(Math.pow(parseInt(b), parseInt(a)));
+          stack.push(`expo(${a},${b})`);
           break;
         default:
           console.log(`Operador não reconhecido`);
@@ -293,10 +299,7 @@ const reverPolish = (postfix) => {
     }
 
   });
-
-
-  console.log(stack[0])
-
+  
   if (stack.length > 1) {
     return "ERROR";
   } else {
@@ -362,18 +365,16 @@ const ShuntingYard = (infix) => {
   return postfix;
 }
 
-rl.question("Insira a sentença ? ", (sentence) => {
+rl.question("Insira a sentença ? ", (dadoInserido) => {
 
-  //const array = sentence.match(/-?[0-9]+|[A-Za-z0-9]+|\S/g);
-  //const name = array.shift();
+  const postfix = ShuntingYard(dadoInserido);
+  const entrada = reverPolish(postfix);
+  
+  const array = entrada.match(/-?[0-9]+|[A-Za-z0-9]+|\S/g);
+  const name = array.shift();
+  console.log("Sentença Formada: ",entrada);
+  console.log("Resultado aritmético da expressão: ",resolve_function(array, name));
 
-  const string = "1+12"
-  const input = string.match(/-?[0-9]+|[A-Za-z0-9]+|\S/g);
-  
-  const postfix = ShuntingYard("1 + 3 * 5");
-  console.log(reverPolish(postfix));
-  
-  //console.log(resolve_function(array, name));
 });
 
 rl.on("close", function () {
