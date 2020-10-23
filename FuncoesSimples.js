@@ -248,6 +248,63 @@ class Stack {
   }
 }
 
+const reverPolish = (postfix) => {
+  
+  let expr = postfix.split(" ");
+  let stack = [];
+
+  if (expr.length===0) {
+    return 0;
+  }
+
+  console.log(postfix);
+
+  expr.forEach(elem => {
+
+    if (!isNaN(elem) && isFinite(elem)) {
+
+      stack.push(elem);
+
+    } else {
+
+      let a = stack.pop();
+      let b = stack.pop();
+
+      switch (elem) {
+        case '+':
+          stack.push(parseInt(a) + parseInt(b));
+          break;
+        case '-':
+          stack.push(parseInt(a) - parseInt(b));
+          break;
+        case '*':
+          stack.push(parseInt(a) * parseInt(b));
+          break;
+        case '/':
+          stack.push(parseInt(a) / parseInt(b));
+          break;
+        case '^':
+          stack.push(Math.pow(parseInt(b), parseInt(a)));
+          break;
+        default:
+          console.log(`Operador não reconhecido`);
+      }
+
+    }
+
+  });
+
+
+  console.log(stack[0])
+
+  if (stack.length > 1) {
+    return "ERROR";
+  } else {
+    return stack[0];
+  }
+
+}
+
 const ShuntingYard = (infix) => {
 
   infix = infix.replace(/\s+/g, ''); // remove spaces, so infix[i]!=" "
@@ -299,8 +356,10 @@ const ShuntingYard = (infix) => {
       stack.pop(); // pop (, but not onto the output queue
     }
   });
+
   postfix += stack.dataStore.reverse().join(" ");
-  console.log(postfix);
+
+  return postfix;
 }
 
 rl.question("Insira a sentença ? ", (sentence) => {
@@ -310,7 +369,10 @@ rl.question("Insira a sentença ? ", (sentence) => {
 
   const string = "1+12"
   const input = string.match(/-?[0-9]+|[A-Za-z0-9]+|\S/g);
-  ShuntingYard("3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3");
+  
+  const postfix = ShuntingYard("1 + 3 * 5");
+  console.log(reverPolish(postfix));
+  
   //console.log(resolve_function(array, name));
 });
 
