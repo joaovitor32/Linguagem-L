@@ -18,6 +18,48 @@ Para implementar a linguagem, 4 grupos são suficientes.
   3) Grupo que implementa função gráfica
   4) Grupo que testa e disponibiliza as informações em um site do Google sites.
 
+I) Parte do interpretador da linguagem L:
+Afeta Grupos 3 e 4
+
+Fase1: interpretador de expressões
+
+I.1) definição das expressões
+numeros:
+<numero> -> <inteiro> | <natural>
+<inteiro> ->  0 | {-}[1-9]{[0-9]}
+<natural> -> [1-9]{[0-9]}
+booleanos:
+<booleano> -> si (true) | no (false)
+cadeias de caracteres:
+<cadeia> -> "..." (... indica qualquer sequência de caracter sem efeito + \n => caracter de nova linha)
+variaveis: inicia com letra minuscula,possui letras minúsculas(a-z), maíusculas(A-Z) e digitos(0-9).
+operadores aritméticos: + (soma-infixo) - (subtração-infixo/troca de sinal-prefixo) * (multiplicação-infixo) / (divisão-infixo) % (resto da divisão-infixo) ^ (potência-infixo) ! (fatorial-posfixo)
+operadores comparativos: < (menor que) > (maior que) = (igual a)
+operadores lógicos: ~ (negação) & (e-lógico) @ (ou-lógico)
+parenteses: ( ) usados para: expressões, argumentos de função, estruturas de fluxo
+atribuição: :={ } As chaves são usadas para definir funções simples/sequência. (Observação: Podem ser dispensadas se usar do() com  1 argumento)
+concatenação: . (para concatenar cadeias ou vetores)
+
+I.2) precedência dos operadores:
+precedência aritméticos:
+() parênteses
+!
+- trocaSinal
+^
+*,/,%
++,- subtracao
+
+precedência lógicos:
+~
+&,@
+
+precedência geral:
+aritméticos
+comparativos
+lógicos
+concatenação
+atribuição
+
 Ex de entrada:
     
    <strong>mult(mult(2,3),soma(4,5))</strong>
