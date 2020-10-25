@@ -79,7 +79,7 @@ $ cd Linguagem-L
 $ npm install
 
 # Run the app
-$ node FuncoesSimples.js
+$ node index.js
 
 ```
 
