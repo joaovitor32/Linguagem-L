@@ -11,6 +11,8 @@ let precedence = {
     "<": 1,
     "!": 6,
     "s": 3,
+    "(": 7,
+    ")": 7,
 };
 
 let associativity = {
@@ -24,6 +26,8 @@ let associativity = {
     "<": "Left",
     "!": "Left",
     "s": "Left",
+    "(": "Left",
+    ")": "Left",
 };
 
 class Stack {
@@ -58,7 +62,9 @@ const ShuntingYard = (infix) => {
     let postfix = "";
     let elem1, elem2;
 
-    console.log(Object.values(infix));
+    // Resolver parenteses antes
+    // e colocar no lugar do primeiro "("
+    // While
 
     Object.values(infix).forEach((element, index) => {
 

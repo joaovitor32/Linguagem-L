@@ -15,6 +15,8 @@ rl.question("Insira a sentença ? ", (dadoInserido) => {
   const postfix = ShuntingYard(dadoInserido);
   const entrada = ReversePolishNotation(postfix);
   
+  console.log(entrada);
+
   const array = entrada.match(/-?[0-9]+|[A-Za-z0-9]+|\S/g);
   const name = array.shift();
   console.log("Sentença Formada: ",entrada);

@@ -73,10 +73,6 @@ const ReverPolishNotation = (postfix) => {
           stack.push(`TrocaSinal(${a})`)
           break;
 
-        case "(":
-
-          break;
-
         default:
           console.log(`Operador não reconhecido`);
       }
