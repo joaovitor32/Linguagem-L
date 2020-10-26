@@ -1,34 +1,15 @@
-let ops = "-+/*^%><!s()";
-
-let precedence = {
-    "^": 4,
-    "*": 3,
-    "/": 3,
-    "+": 2,
-    "-": 2,
-    "%": 3,
-    ">": 1,
-    "<": 1,
-    "!": 6,
-    "s": 3,
-    "(": 7,
-    ")": 7,
-};
-
-let associativity = {
-    "^": "Right",
-    "*": "Left",
-    "/": "Left",
-    "+": "Left",
-    "-": "Left",
-    ">": "Left",
-    "%": "Left",
-    "<": "Left",
-    "!": "Left",
-    "s": "Left",
-    "(": "Left",
-    ")": "Left",
-};
+let operators = {
+    ['^']: [{ associativity: "Right", precedence: 4 }],
+    ['*']: [{ associativity: "Left", precedence: 3 }],
+    ['/']: [{ associativity: "Left", precedence: 3 }],
+    ['+']: [{ associativity: "Left", precedence: 2 }],
+    ['-']: [{ associativity: "Left", precedence: 2 }],
+    ['%']: [{ associativity: "Left", precedence: 3 }],
+    ['>']: [{ associativity: "Left", precedence: 1 }],
+    ['<']: [{ associativity: "Left", precedence: 1 }],
+    ['!']: [{ associativity: "Left", precedence: 6 }],
+    ['s']: [{ associativity: "Left", precedence: 3 }],
+}
 
 class Stack {
     constructor() {
@@ -38,9 +19,7 @@ class Stack {
             return this.dataStore[this.top - 1];
         }
         this.push = (element) => {
-            if (!!element) {
-                this.dataStore[this.top++] = element;
-            }
+            this.dataStore[this.top++] = element;
         }
         this.pop = () => {
             return this.dataStore[--this.top];
@@ -52,63 +31,84 @@ class Stack {
     }
 }
 
-const ShuntingYard = (infix) => {
+const isNumeric = (str) => {
+    if (typeof str != "string") return false
+    return !isNaN(str) &&
+        !isNaN(parseFloat(str))
+}
+
+//https://en.wikipedia.org/wiki/Shunting-yard_algorithm
+const ShuntingYard = (infix, index) => {
 
     infix = infix.replace(/\s+/g, ''); // remove spaces, so infix[i]!=" "
 
     let stack = new Stack();
+    let numeros = new Stack();
 
     let token;
     let postfix = "";
-    let elem1, elem2;
 
-    // Resolver parenteses antes
-    // e colocar no lugar do primeiro "("
-    // While
+    Object.values(infix).forEach((elem, index) => {
 
-    Object.values(infix).forEach((element, index) => {
+        token = elem;
 
-        token = infix[index];
+        if (isNumeric(token)) {
 
-        if (token >= "0" && token <= "9") { // if token is operand (here limited to 0 <= x <= 9)
+            numeros.dataStore.push(token);
 
-            postfix += token + " ";
+        } else if (operators[token]) {
 
-        } else if (ops.indexOf(token) != -1) { // if token is an operator
+            let topoStack = stack.peek();
 
-            elem1 = token;
-            elem2 = stack.peek();
+            while (
+                operators[topoStack] &&
+                (
+                    operators[token].precedence < operators[topoStack].precedence ||
+                    (
+                        operators[token].precedence == operators[topoStack].precedence &&
+                        operators[token].associativity == "Left"
+                    ) &&
+                    operators[token] !== "("
+                )
+            ) {
 
-      /* 
-      
-      I - while operator token, o2, on top of the stack and o1 is left-associative 
-      and its precedence is less than or equal to that of o2
- 
-      II - the algorithm on wikipedia says: or o1 precedence < o2 precedence, but I think it should be
-      or o1 is right-associative and its precedence is less than that of o2
- 
-      */
-            while (ops.indexOf(elem2) != -1 && (associativity[elem1] == "Left" &&
-                    (precedence[elem1] <= precedence[elem2])) || (associativity[elem1] == "Right" &&
-                    (precedence[elem1] < precedence[elem2]))) {
-                postfix += elem2 + " "; // add o2 to output queue
-                stack.pop(); // pop o2 of the stack
-                elem2 = stack.peek(); // next round
+                numeros.push(stack.pop());
+
             }
-            stack.push(elem1); // push o1 onto the stack
-        }else if (token == "(") { // if token is left parenthesis
             stack.push(token);
-        } else if (token == ")") {
-            while (stack.peek() != "(") { // until token at top is (
-                postfix += stack.pop() + " ";
-            }
-            stack.pop(); // pop (, but not onto the output queue
-        }
-    });
 
+        } else if (token == "(") {
+
+            stack.push(token);
+
+        } else if (token == ")") {
+
+            let i=stack.dataStore.length-1;
+
+            while (stack.dataStore[i] !== "(") {
+
+                numeros.push(stack.pop());
+            
+                i--;
+
+            }
+
+            if (stack.dataStore[stack.dataStore.length-1] == "(") {
+
+                stack.pop();
+
+            }
+
+        }
+
+    })
+
+    postfix += numeros.dataStore.reverse().join(" ");
+    postfix += " "
     postfix += stack.dataStore.reverse().join(" ");
 
     return postfix;
+
 }
 
 export default ShuntingYard;

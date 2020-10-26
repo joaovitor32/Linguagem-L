@@ -28,8 +28,8 @@ const FunctionsList = {
   ['maior']: [(a,b) => { return maior(a,b) }, { args: 2 }],
   ['menor']: [(a,b) => { return menor(a,b) }, { args: 2 }],
   ['resto']: [(a,b) => { return resto(a,b) }, { args: 1 }],
-  ['fatorial']: [(a,b) => { return fatorial(a) }, { args: 1 }],
-  ['TrocaSinal']: [(a,b) => { return TrocaSinal(a) }, { args: 1 }],
+  ['fatorial']: [(a) => { return fatorial(a) }, { args: 1 }],
+  ['TrocaSinal']: [(a) => { return TrocaSinal(a) }, { args: 1 }],
 };
 
 //res = response

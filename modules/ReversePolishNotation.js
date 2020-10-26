@@ -1,6 +1,22 @@
+const OperatorsList = {
+  ['+']: [(a, b) => { return `soma(${a},${b})` }, { args: 2 }],
+  ['!']: [(a) => { return `fatorial(${a})` }, { args: 1 }],
+  ['*']: [(a, b) => { return `mult(${a},${b})` }, { args: 2 }],
+  ['^']: [(a, b) => { return `expo(${a},${b})` }, { args: 2 }],
+  ['-']: [(a, b) => { return `subt(${a},${b})` }, { args: 2 }],
+  ['/']: [(a, b) => { return `divi(${a},${b})` }, { args: 2 }],
+  ['>']: [(a, b) => { return `maior(${a},${b})` }, { args: 2 }],
+  ['<']: [(a, b) => { return `menor(${a},${b})` }, { args: 2 }],
+  ['%']: [(a, b) => { return `resto(${a},${b})` }, { args: 2 }],
+  ['s']: [(a) => { return `TrocaSinal(${a})` }, { args: 1 }],
+};
+
 const ReverPolishNotation = (postfix) => {
+  
+  console.log(postfix);
 
   let expr = postfix.split(" ");
+
   let stack = [];
 
   if (expr.length === 0) {
@@ -20,62 +36,9 @@ const ReverPolishNotation = (postfix) => {
       let a = stack.pop();
       let b = stack.pop();
 
-      switch (elem) {
-
-        case '+':
-
-          stack.push(`soma(${a},${b})`);
-          break;
-
-        case '-':
-
-          stack.push(`subt(${a},${b})`);
-          break;
-
-        case '*':
-
-
-          stack.push(`mult(${a},${b})`);
-          break;
-
-        case '/':
-
-          stack.push(`divi(${a},${b})`);
-          break;
-
-        case '^':
-
-          stack.push(`expo(${a},${b})`);
-          break;
-
-        case ">":
-
-          stack.push(`maior(${a},${b})`);
-          break;
-
-        case "<":
-
-          stack.push(`menor(${a},${b})`);
-          break;
-
-        case '%':
-
-          stack.push(`resto(${a},${b})`)
-          break;
-
-        case "!":
-
-          stack.push(`fatorial(${a})`)
-          break;
-
-        case "s":
-
-          stack.push(`TrocaSinal(${a})`)
-          break;
-
-        default:
-          console.log(`Operador não reconhecido`);
-      }
+      OperatorsList[elem][1].args == 2 ?
+        stack.push(OperatorsList[elem][0](a, b)):
+        stack.push(OperatorsList[elem][0](a));
 
     }
 
