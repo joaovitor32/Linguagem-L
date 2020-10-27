@@ -32,9 +32,9 @@ const ReverPolishNotation = (postfix) => {
       //Dado o conceito de pilha se a operação for unária 
       // a sempre vai ser a váriavel com valor e b indefinido
       let a = stack.pop();
-      let b = stack.pop();
 
       if (OperatorsList[elem][1].args == 2) {
+        let b = stack.pop();
         stack.push(OperatorsList[elem][0](a, b));
       } else {
         stack.push(OperatorsList[elem][0](a));

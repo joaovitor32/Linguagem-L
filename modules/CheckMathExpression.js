@@ -53,8 +53,12 @@ const CheckMathExpression = (str) => {
             invalidOperatorPairs.forEach((elem, j) => {
 
                 if (
-                    str[index - 1] == invalidOperatorPairs[j][0] &&
-                    current == invalidOperatorPairs[j][1]
+                    (str[index - 1] == invalidOperatorPairs[j][0] &&
+                    current == invalidOperatorPairs[j][1])&&
+                    (
+                        (!isNaN(str[index - 1])&&!isNaN(str[index]))||
+                        (!isNaN(str[index])&&!isNaN(str[index+1]))
+                    )
                 ) {
                     throw new Error("Operador inválido sendo utilizado");
                 }

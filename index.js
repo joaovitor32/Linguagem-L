@@ -5,7 +5,8 @@ import CheckMathExpression from './modules/CheckMathExpression.js';
 
 export function Solve_Expression(expression){
   
-  expression = "1+2*9*4+5/2";
+  //expression = "1+2*9*4+5/2";
+  expression = "9!+1"
 
   CheckMathExpression(expression);
 
