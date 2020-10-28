@@ -10,6 +10,7 @@ import resto from '../utils/resto.js';
 import fatorial from '../utils/fatorial.js';
 import TrocaSinal from '../utils/trocaSinal.js';
 import getNumberOfArguments from '../utils/getNumberOfArguments.js';
+import pow from '../utils/pow.js';
 
 const variables = []; // vetor que ficarão as variáveis declaradas pela linguagem
 

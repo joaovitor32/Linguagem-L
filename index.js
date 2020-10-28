@@ -5,12 +5,15 @@ import CheckMathExpression from './modules/CheckMathExpression.js';
 
 export function Solve_Expression(expression){
   
-  //expression = "1+2*9*4+5/2";
-  expression = "9!+1"
+  //expression = "1*2-3"
+  //expression = "1+2*9*4+5/2+1*5";
+  //expression = "1+1*(1+2)";
+  expression = "1---+2*5"
+  //  expression= "3+4*2/(1−5)^2^3";
 
-  CheckMathExpression(expression);
+  let string = CheckMathExpression(expression);
 
-  const postfix = ShuntingYard(expression);
+  const postfix = ShuntingYard(string);
 
   const entrada = ReversePolishNotation(postfix);
 

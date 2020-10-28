@@ -12,7 +12,7 @@ const OperatorsList = {
 };
 
 const ReverPolishNotation = (postfix) => {
-
+  
   let expr = postfix.split(" ");
 
   let stack = [];
@@ -34,10 +34,14 @@ const ReverPolishNotation = (postfix) => {
       let a = stack.pop();
 
       if (OperatorsList[elem][1].args == 2) {
+       
         let b = stack.pop();
         stack.push(OperatorsList[elem][0](a, b));
+      
       } else {
+      
         stack.push(OperatorsList[elem][0](a));
+      
       }
     
     }

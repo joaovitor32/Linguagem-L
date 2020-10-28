@@ -7,34 +7,30 @@ let operators = {
     ['%']: [{ associativity: "Left", precedence: 3 }],
     ['>']: [{ associativity: "Left", precedence: 1 }],
     ['<']: [{ associativity: "Left", precedence: 1 }],
-    ['!']: [{ associativity: "Left", precedence: 6 }],
-    ['s']: [{ associativity: "Left", precedence: 3 }],
+    ['!']: [{ associativity: "Right", precedence: 6 }],
+    ['s']: [{ associativity: "Right", precedence: 3 }],
 }
 
 class Stack {
     constructor() {
         this.dataStore = [];
-        this.top = 0;
+
         this.peek = () => {
-            return this.dataStore[this.top - 1];
+            return this.dataStore[this.dataStore.length - 1];
         }
         this.push = (element) => {
-            this.dataStore[this.top++] = element;
+            this.dataStore.push(element);
+            return;
         }
         this.pop = () => {
-            return this.dataStore[--this.top];
-        }
-
-        this.length = () => {
-            return this.top;
+            return this.dataStore.pop();
         }
     }
 }
 
 const isNumeric = (str) => {
     if (typeof str != "string") return false
-    return !isNaN(str) &&
-        !isNaN(parseFloat(str))
+    return !isNaN(str) && !isNaN(parseFloat(str))
 }
 
 //https://en.wikipedia.org/wiki/Shunting-yard_algorithm
@@ -56,25 +52,26 @@ const ShuntingYard = (infix, index) => {
 
             numeros.dataStore.push(token);
 
-        } else if (operators[token]) {
+        } else if (!!operators[token]) {
 
             let topoStack = stack.peek();
 
             while (
-                operators[topoStack] &&
-                (
-                    operators[token].precedence < operators[topoStack].precedence ||
-                    (
-                        operators[token].precedence == operators[topoStack].precedence &&
-                        operators[token].associativity == "Left"
-                    ) &&
-                    operators[token] !== "("
-                )
+                (topoStack!=undefined) &&
+                (operators[token][0].precedence < operators[topoStack][0].precedence ||
+                    (operators[token][0].precedence === operators[topoStack][0].precedence &&
+                        operators[token][0].associativity == "Left"
+                    )) &&
+
+                (topoStack !== "(")
+
             ) {
 
                 numeros.push(stack.pop());
+                topoStack = stack.peek();
 
             }
+
             stack.push(token);
 
         } else if (token == "(") {
@@ -83,17 +80,16 @@ const ShuntingYard = (infix, index) => {
 
         } else if (token == ")") {
 
-            let i=stack.dataStore.length-1;
+            let stack_top = stack.peek();
 
-            while (stack.dataStore[i] !== "(") {
+            while (stack_top != "(") {
 
                 numeros.push(stack.pop());
-            
-                i--;
+                stack_top = stack.peek();
 
             }
 
-            if (stack.dataStore[stack.dataStore.length-1] == "(") {
+            if (stack_top == "(") {
 
                 stack.pop();
 
@@ -103,10 +99,10 @@ const ShuntingYard = (infix, index) => {
 
     })
 
-    postfix += numeros.dataStore.reverse().join(" ");
+    postfix += numeros.dataStore.join(" ");
     postfix += " "
     postfix += stack.dataStore.reverse().join(" ");
-
+    
     return postfix;
 
 }
