@@ -34,81 +34,64 @@ let exceptions = [
     "++",
     "--",
     "+-",
-    "-+"
+    "-+",
 ]
 
 const getUnaryOperator = (previous, current) => {
+    
     if (previous == current) {
         return "+";
-    }
-
-    if (current != previous) {
+    }else{
         return "-";
     }
 
 }
 
+//Check Invalid terms
+const checkInvalidTerms = (str, index) => {
+    invalidOperatorPairs.forEach((elem, j) => {
+        if (
+            (str[index - 1] == invalidOperatorPairs[j][0] &&
+                str[index] == invalidOperatorPairs[j][1]) &&
+            (
+                (!isNaN(str[index - 1]) && !isNaN(str[index])) ||
+                (!isNaN(str[index]) && !isNaN(str[index + 1]))
+            )
+        ) {
+            throw new Error("Operador inválido sendo utilizado");
+        }
+    })
+}
+
+const checkExceptions = (str, index) => {
+
+    //Vai ter que ser em relação ao str
+    //Usar While <- Ideia boa
+
+    exceptions.forEach((elem, s) => {
+       
+        while (
+            (str[index - 1] == exceptions[s][0] && str[index] == exceptions[s][1])&&
+            (exceptions[s][0]!=undefined && exceptions[s][1]!=undefined)
+        ) {
+
+            let arrayStr = str.split("");
+
+            arrayStr[index] = getUnaryOperator(arrayStr[index - 1], arrayStr[index]);
+
+            arrayStr = arrayStr.filter((_, i) => i != (index - 1));
+
+            str = arrayStr.join("");
+           
+        }
+    })
+
+    return str;
+}
+
 const CheckMathExpression = (str) => {
 
     let open = 0;
-
-    Object.values(str).forEach((element, index) => {
-
-        let current = element;
-
-        if (current == "(") {
-            open++;
-        } else if (current == ")") {
-            open--;
-        }
-
-        if (index === Object.values(str).length - 1 && open !== 0) {
-            throw new Error("Parênteses inválidos")
-        }
-
-        if (index > 0) {
-
-            invalidOperatorPairs.forEach((elem, j) => {
-
-                //Check Invalid terms
-                if (
-                    (str[index - 1] == invalidOperatorPairs[j][0] &&
-                        current == invalidOperatorPairs[j][1]) &&
-                    (
-                        (!isNaN(str[index - 1]) && !isNaN(str[index])) ||
-                        (!isNaN(str[index]) && !isNaN(str[index + 1]))
-                    )
-                ) {
-                    throw new Error("Operador inválido sendo utilizado");
-                }
-
-                //Check unary operations like +++ and ---
-                if (exceptions[j] != undefined && index!=j) {
-
-                    if (
-                        (str[index - 1] == exceptions[j][0] &&
-                            current == exceptions[j][1])) {
-
-                        let arrayStr = str.split("");
-
-                        arrayStr[index - 1] = getUnaryOperator(str[index - 1], current);
-
-                        const previous = arrayStr.indexOf(arrayStr[index-1]);
-                        const next = arrayStr.indexOf(current);
-
-                        if (previous > -1 && next>-1 ) {
-                            arrayStr.splice(previous,next);
-                        }
-
-                        str = arrayStr.join("");
-
-                    }
-                }
-            })
-
-        }
-
-    });
 
     let sections = str.split(/[\+\-\*\/\^\)\(]/g);
 
@@ -120,6 +103,27 @@ const CheckMathExpression = (str) => {
             isFinite(elem)
         ) {
             throw new Error('Erro não detectado');
+        }
+
+    });
+
+    Object.values(str).forEach((element, index) => {
+        
+        let current = element;
+
+        if (current == "(") {
+            open++;
+        } else if (current == ")") {
+            open--;
+        }
+
+        if (index > str.length && open !== 0) {
+            throw new Error("Parênteses inválidos")
+        }
+
+        if (index > 0) {
+            checkInvalidTerms(str, index);
+            str = checkExceptions(str, index);
         }
 
     });

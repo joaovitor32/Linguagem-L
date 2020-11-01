@@ -8,8 +8,10 @@ export function Solve_Expression(expression){
   //expression = "1*2-3"
   //expression = "1+2*9*4+5/2+1*5";
   //expression = "1+1*(1+2)";
-  expression = "1---+2*5"
-  //  expression= "3+4*2/(1−5)^2^3";
+  //expression = "1+---+2++2-+2-+1*9++2"
+  //expression = "3!+s3"
+  //expression= "1*(1-+2)/(3-2)";
+  expression = "function tien(){}";
 
   let string = CheckMathExpression(expression);
 

@@ -33,6 +33,49 @@ const isNumeric = (str) => {
     return !isNaN(str) && !isNaN(parseFloat(str))
 }
 
+const checkFunctionSentence = (functionSentence) => {
+
+    let brackets = 0;
+
+    functionSentence.forEach((elem, index) => {
+        switch (elem) {
+            case '{':
+                brackets++;
+                break;
+            case '}':
+                brackets--;
+            default:
+                throw new Error('Erro não identificado');
+        }
+    })
+
+    if (brackets != 0) {
+
+        throw new Error("Colchetes errados");
+
+    }
+    return;
+
+}
+
+const formEntireFunction = (str, init) => {
+
+    let i = init;
+    let sentence = str[init];
+
+    while (str[i] != "}") {
+        i++;
+        sentence += str[i];
+    }
+
+    if (i == str.length) {
+        throw new Error("Função formada de forma errada");
+    }
+
+    return sentence;
+};
+
+
 //https://en.wikipedia.org/wiki/Shunting-yard_algorithm
 const ShuntingYard = (infix, index) => {
 
@@ -57,9 +100,10 @@ const ShuntingYard = (infix, index) => {
             let topoStack = stack.peek();
 
             while (
-                (topoStack!=undefined) &&
-                (operators[token][0].precedence < operators[topoStack][0].precedence ||
-                    (operators[token][0].precedence === operators[topoStack][0].precedence &&
+
+                (!!topoStack) &&
+                (operators[token][0].precedence < topoStack ? operators[topoStack][0].precedence : 0 ||
+                    (operators[token][0].precedence == topoStack ? operators[topoStack][0].precedence : 0 &&
                         operators[token][0].associativity == "Left"
                     )) &&
 
@@ -73,6 +117,23 @@ const ShuntingYard = (infix, index) => {
             }
 
             stack.push(token);
+
+        } else if (token === "f") {
+
+            let functionKey = "";
+
+            let init = 0
+
+            while (init < 8) {
+                functionKey += infix[index + init];
+                init++;
+            }
+
+            if (functionKey == "function") {
+
+                let formedSentence = formEntireFunction(Object.values(infix), index + init);
+                
+            }
 
         } else if (token == "(") {
 
@@ -102,7 +163,7 @@ const ShuntingYard = (infix, index) => {
     postfix += numeros.dataStore.join(" ");
     postfix += " "
     postfix += stack.dataStore.reverse().join(" ");
-    
+
     return postfix;
 
 }
