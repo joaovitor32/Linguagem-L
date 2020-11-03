@@ -1,18 +1,25 @@
-const OperatorsList = {
-  ['+']: [(a, b) => { return `soma(${a},${b})` }, { args: 2 }],
-  ['!']: [(a) => { return `fatorial(${a})` }, { args: 1 }],
-  ['*']: [(a, b) => { return `mult(${a},${b})` }, { args: 2 }],
-  ['^']: [(a, b) => { return `expo(${a},${b})` }, { args: 2 }],
-  ['-']: [(a, b) => { return `subt(${a},${b})` }, { args: 2 }],
-  ['/']: [(a, b) => { return `divi(${a},${b})` }, { args: 2 }],
-  ['>']: [(a, b) => { return `maior(${a},${b})` }, { args: 2 }],
-  ['<']: [(a, b) => { return `menor(${a},${b})` }, { args: 2 }],
-  ['%']: [(a, b) => { return `resto(${a},${b})` }, { args: 2 }],
-  ['s']: [(a) => { return `TrocaSinal(${a})` }, { args: 1 }],
-};
+import { OperatorsList } from '../constants.js';
 
-const ReverPolishNotation = (postfix) => {
+const Add_Operator_List = (operatorName, qtdArgs) => {
+
+  if (!OperatorsList[operatorName]) {
+   
+    if (qtdArgs == 2) {
   
+      OperatorsList[operatorName] = [(a, b) => { return `${operatorName}(${a},${b})` }, { args: qtdArgs }];
+  
+    } else {
+  
+      OperatorsList[operatorName] = [(a) => { return `${operatorName}(${a})` }, { args: qtdArgs }];
+  
+    }
+  
+  }
+  
+}
+
+const ReversePolishNotation = (postfix) => {
+
   let expr = postfix.split(" ");
 
   let stack = [];
@@ -34,16 +41,16 @@ const ReverPolishNotation = (postfix) => {
       let a = stack.pop();
 
       if (OperatorsList[elem][1].args == 2) {
-       
+
         let b = stack.pop();
         stack.push(OperatorsList[elem][0](a, b));
-      
+
       } else {
-      
+
         stack.push(OperatorsList[elem][0](a));
-      
+
       }
-    
+
     }
 
   });
@@ -56,4 +63,4 @@ const ReverPolishNotation = (postfix) => {
 
 }
 
-export default ReverPolishNotation;
+export { ReversePolishNotation, Add_Operator_List };

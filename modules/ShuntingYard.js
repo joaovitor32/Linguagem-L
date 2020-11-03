@@ -1,15 +1,7 @@
-let operators = {
-    ['^']: [{ associativity: "Right", precedence: 4 }],
-    ['*']: [{ associativity: "Left", precedence: 3 }],
-    ['/']: [{ associativity: "Left", precedence: 3 }],
-    ['+']: [{ associativity: "Left", precedence: 2 }],
-    ['-']: [{ associativity: "Left", precedence: 2 }],
-    ['%']: [{ associativity: "Left", precedence: 3 }],
-    ['>']: [{ associativity: "Left", precedence: 1 }],
-    ['<']: [{ associativity: "Left", precedence: 1 }],
-    ['!']: [{ associativity: "Right", precedence: 6 }],
-    ['s']: [{ associativity: "Right", precedence: 3 }],
-}
+import { operators } from '../constants.js';
+
+import isNumeric from '../utils/isNumeric.js';
+import tokenize from '../utils/tokenize.js';
 
 class Stack {
     constructor() {
@@ -28,12 +20,8 @@ class Stack {
     }
 }
 
-const isNumeric = (str) => {
-    if (typeof str != "string") return false
-    return !isNaN(str) && !isNaN(parseFloat(str))
-}
 
-const checkFunctionSentence = (functionSentence) => {
+/*const checkFunctionSentence = (functionSentence) => {
 
     let brackets = 0;
 
@@ -56,36 +44,24 @@ const checkFunctionSentence = (functionSentence) => {
     }
     return;
 
+}*/
+
+const Add_Operator = (name) => {
+    if (!operators[name]) {
+        operators[name] = [{ associativity: "Left", precedence: 1 }];
+    }
 }
 
-const formEntireFunction = (str, init) => {
-
-    let i = init;
-    let sentence = str[init];
-
-    while (str[i] != "}") {
-        i++;
-        sentence += str[i];
-    }
-
-    if (i == str.length) {
-        throw new Error("Função formada de forma errada");
-    }
-
-    return sentence;
-};
-
-
 //https://en.wikipedia.org/wiki/Shunting-yard_algorithm
-const ShuntingYard = (infix, index) => {
-
-    infix = infix.replace(/\s+/g, ''); // remove spaces, so infix[i]!=" "
+const ShuntingYard = (infix) => {
 
     let stack = new Stack();
     let numeros = new Stack();
 
     let token;
     let postfix = "";
+
+    infix = tokenize(infix);
 
     Object.values(infix).forEach((elem, index) => {
 
@@ -117,23 +93,6 @@ const ShuntingYard = (infix, index) => {
             }
 
             stack.push(token);
-
-        } else if (token === "f") {
-
-            let functionKey = "";
-
-            let init = 0
-
-            while (init < 8) {
-                functionKey += infix[index + init];
-                init++;
-            }
-
-            if (functionKey == "function") {
-
-                let formedSentence = formEntireFunction(Object.values(infix), index + init);
-                
-            }
 
         } else if (token == "(") {
 
@@ -168,4 +127,4 @@ const ShuntingYard = (infix, index) => {
 
 }
 
-export default ShuntingYard;
+export { ShuntingYard, Add_Operator };
