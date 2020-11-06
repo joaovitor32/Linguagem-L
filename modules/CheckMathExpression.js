@@ -37,11 +37,16 @@ let exceptions = [
     "-+",
 ]
 
+let binaryOperator=[
+    '+',
+    '-'
+]
+
 const getUnaryOperator = (previous, current) => {
-    
+
     if (previous == current) {
         return "+";
-    }else{
+    } else {
         return "-";
     }
 
@@ -69,20 +74,24 @@ const checkExceptions = (str, index) => {
     //Usar While <- Ideia boa
 
     exceptions.forEach((elem, s) => {
-       
-        while (
-            (str[index - 1] == exceptions[s][0] && str[index] == exceptions[s][1])&&
-            (exceptions[s][0]!=undefined && exceptions[s][1]!=undefined)
+
+        if (
+            (str[index - 1] === exceptions[s][0]) &&
+            (str[index] === exceptions[s][1]) &&
+            (exceptions[s][0] != undefined && exceptions[s][1] != undefined)
         ) {
 
-            let arrayStr = str.split("");
+            while (binaryOperator.includes(str[index])) {
 
-            arrayStr[index] = getUnaryOperator(arrayStr[index - 1], arrayStr[index]);
+                let arrayStr = str.split("");
 
-            arrayStr = arrayStr.filter((_, i) => i != (index - 1));
+                arrayStr[index] = getUnaryOperator(arrayStr[index - 1], arrayStr[index]);
 
-            str = arrayStr.join("");
-           
+                arrayStr = arrayStr.filter((_, i) => i != (index - 1));
+
+                str = arrayStr.join("");
+            }
+
         }
     })
 
@@ -108,7 +117,7 @@ const CheckMathExpression = (str) => {
     });
 
     Object.values(str).forEach((element, index) => {
-        
+
         let current = element;
 
         if (current == "(") {

@@ -12,8 +12,6 @@ const Add_Function_List = (functionName, args, content) => {
 
   let formedFunction;
 
-  console.log(content);
-
   if (!FunctionsList[functionName]) {
 
     if (args.length == 2) {

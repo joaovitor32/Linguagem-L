@@ -64,12 +64,15 @@ function Solve_Expression(expression) {
   //expression = "1*2-3"
   //expression = "1+2*9*4+5/2+1*5";
   //expression = "1+1*(1+2)";
-  //expression = "1+---+2++2-+2-+1*9++2"
+  //expression = "1++-+-+--+--++++---++--++--++--++--++--2"
   //expression = "3!+s3"
   //expression= "1*(1-+2)/(3-2)";
   //expression = "function tien(a,b){ a+b*b } function arroba(a,b){ a+b*b } ";
+  //expression="2^2^2^2"
 
   let string = CheckMathExpression(expression);
+
+  console.log(string);
 
   const postfix = ShuntingYard(string);
 
@@ -84,8 +87,7 @@ function Solve_Expression(expression) {
 
 }
 
-Add_Function("function tien(a,b){ a+b*b*a }");
-console.log(Solve_Expression('2 tien 1'));
+console.log(Solve_Expression('fadasds'));
 
 export { Solve_Expression, Add_Function }
 
