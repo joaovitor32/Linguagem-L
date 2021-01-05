@@ -126,16 +126,18 @@ const CheckMathExpression = (str) => {
             open--;
         }
 
-        if (index > str.length && open !== 0) {
-            throw new Error("Parênteses inválidos")
-        }
-
         if (index > 0) {
             checkInvalidTerms(str, index);
             str = checkExceptions(str, index);
         }
 
     });
+
+    if (open !== 0) {
+           
+        throw new Error("Parênteses inválidos")
+    
+    }
 
     return str;
 
