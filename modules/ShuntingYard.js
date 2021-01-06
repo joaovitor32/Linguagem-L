@@ -1,4 +1,4 @@
-import { operators } from '../constants.js';
+import { operators } from '../data/constants.js';
 
 import isNumeric from '../utils/isNumeric.js';
 import tokenize from '../utils/tokenize.js';
@@ -45,12 +45,6 @@ class Stack {
     return;
 
 }*/
-
-const Add_Operator = (name) => {
-    if (!operators[name]) {
-        operators[name] = [{ associativity: "Left", precedence: 1 }];
-    }
-}
 
 //https://en.wikipedia.org/wiki/Shunting-yard_algorithm
 const ShuntingYard = (infix) => {
@@ -127,4 +121,4 @@ const ShuntingYard = (infix) => {
 
 }
 
-export { ShuntingYard, Add_Operator };
+export { ShuntingYard };

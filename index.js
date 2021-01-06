@@ -1,7 +1,9 @@
 import CheckMathExpression from './modules/CheckMathExpression.js';
-import { ReversePolishNotation,Add_Operator_List} from './modules/ReversePolishNotation.js';
-import { ShuntingYard ,Add_Operator} from './modules/ShuntingYard.js';
-import { ResolveExpression, Add_Function_List } from './modules/ResolveExpression.js';
+import { ReversePolishNotation } from './modules/ReversePolishNotation.js';
+import { ShuntingYard } from './modules/ShuntingYard.js';
+import { ResolveExpression } from './modules/ResolveExpression.js';
+
+import {Add_Function_List,Add_Operator,Add_Operator_List,FunctionsList} from './data/constants.js';
 
 import tokenize from './utils/tokenize.js';
 
@@ -62,17 +64,15 @@ function Add_Function(functionLine) {
 function Solve_Expression(expression) {
 
   //expression = "1*2-3"
-  //expression = "1+2*9*4+5/2+1*5";
+  expression = "1+2*9";
   //expression = "1+1*(1+2)";
   //expression = "1++-+-+--+--++++---++--++--++--++--++--2"
   //expression = "3!+s3"
-  //expression= "1*(1-+2)/(3-2)";
-  //expression = "function tien(a,b){ a+b*b } function arroba(a,b){ a+b*b } ";
-  //expression="2^2^2^2"
+  //expression= "3!!3";
+  //expression = "tien(1,2) ";
+  //expression="2***2"
 
   let string = CheckMathExpression(expression);
-
-  console.log(string);
 
   const postfix = ShuntingYard(string);
 
@@ -87,7 +87,7 @@ function Solve_Expression(expression) {
 
 }
 
-console.log(Solve_Expression('fadasds'));
+console.log(Solve_Expression('tien 4 2'));
 
 export { Solve_Expression, Add_Function }
 

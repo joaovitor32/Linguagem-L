@@ -28,6 +28,7 @@ let invalidOperatorPairs = [
     "+)",
     "-)",
     "^)",
+    "!!"
 ]
 
 let exceptions = [
@@ -57,13 +58,8 @@ const checkInvalidTerms = (str, index) => {
     invalidOperatorPairs.forEach((elem, j) => {
         if (
             (str[index - 1] == invalidOperatorPairs[j][0] &&
-                str[index] == invalidOperatorPairs[j][1]) &&
-            (
-                (!isNaN(str[index - 1]) && !isNaN(str[index])) ||
-                (!isNaN(str[index]) && !isNaN(str[index + 1]))
-            )
-        ) {
-            throw new Error("Operador inválido sendo utilizado");
+                str[index] == invalidOperatorPairs[j][1])) {
+                    throw new Error("Operador inválido sendo utilizado")
         }
     })
 }
@@ -101,20 +97,6 @@ const checkExceptions = (str, index) => {
 const CheckMathExpression = (str) => {
 
     let open = 0;
-
-    let sections = str.split(/[\+\-\*\/\^\)\(]/g);
-
-    sections.forEach(elem => {
-
-        if (
-            (elem.length > 0) &&
-            !(Number(elem) !== NaN) &&
-            isFinite(elem)
-        ) {
-            throw new Error('Erro não detectado');
-        }
-
-    });
 
     Object.values(str).forEach((element, index) => {
 

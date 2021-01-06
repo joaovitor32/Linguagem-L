@@ -1,4 +1,4 @@
-import { FunctionsList } from '../constants.js';
+import { FunctionsList } from '../data/constants.js';
 
 import getNumberOfArguments from '../utils/getNumberOfArguments.js';
 
@@ -7,28 +7,6 @@ const variables = []; // vetor que ficarão as variáveis declaradas pela lingua
 const funcao = 'function';
 const string = 'string';
 const integer = 'integer'
-
-const Add_Function_List = (functionName, args, content) => {
-
-  let formedFunction;
-
-  if (!FunctionsList[functionName]) {
-
-    if (args.length == 2) {
-      
-      formedFunction = new Function("a", "b", `return ${content}`);    
-      FunctionsList[functionName] = [(a, b) => formedFunction(a,b) , { args: args.length }];
-
-    } else {
-
-      formedFunction = new Function("a", `return ${content}`);
-      FunctionsList[functionName] = [(a) => formedFunction(a), { args: args.length }];
-
-    }
-
-  }
-
-}
 
 //res = response
 const Tokens = {
@@ -219,4 +197,4 @@ const ResolveExpression = (array, name) => {
 }
 
 
-export { ResolveExpression, Add_Function_List };
+export { ResolveExpression };

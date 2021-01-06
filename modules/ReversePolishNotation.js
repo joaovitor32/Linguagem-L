@@ -1,22 +1,4 @@
-import { OperatorsList } from '../constants.js';
-
-const Add_Operator_List = (operatorName, qtdArgs) => {
-
-  if (!OperatorsList[operatorName]) {
-   
-    if (qtdArgs == 2) {
-  
-      OperatorsList[operatorName] = [(a, b) => { return `${operatorName}(${a},${b})` }, { args: qtdArgs }];
-  
-    } else {
-  
-      OperatorsList[operatorName] = [(a) => { return `${operatorName}(${a})` }, { args: qtdArgs }];
-  
-    }
-  
-  }
-  
-}
+import { OperatorsList } from '../data/constants.js';
 
 const ReversePolishNotation = (postfix) => {
 
@@ -54,13 +36,16 @@ const ReversePolishNotation = (postfix) => {
     }
 
   });
-
+  
   if (stack.length > 1) {
-    return "ERROR";
+    
+    throw new Error("Not identified tokens");
+
   } else {
+    
     return stack[0];
   }
 
 }
 
-export { ReversePolishNotation, Add_Operator_List };
+export { ReversePolishNotation };
