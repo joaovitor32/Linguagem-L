@@ -36,7 +36,7 @@ const ReversePolishNotation = (postfix) => {
     }
 
   });
-  
+
   if (stack.length > 1) {
     
     throw new Error("Not identified tokens");
@@ -48,4 +48,4 @@ const ReversePolishNotation = (postfix) => {
 
 }
 
-export { ReversePolishNotation };
+export default ReversePolishNotation ;

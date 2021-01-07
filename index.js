@@ -1,6 +1,6 @@
 import CheckMathExpression from './modules/CheckMathExpression.js';
-import { ReversePolishNotation } from './modules/ReversePolishNotation.js';
-import { ShuntingYard } from './modules/ShuntingYard.js';
+import ReversePolishNotation  from './modules/ReversePolishNotation.js';
+import  ShuntingYard  from './modules/ShuntingYard.js';
 import { ResolveExpression } from './modules/ResolveExpression.js';
 
 import {Add_Function_List,Add_Operator,Add_Operator_List,FunctionsList} from './data/constants.js';
@@ -64,7 +64,7 @@ function Add_Function(functionLine) {
 function Solve_Expression(expression) {
 
   //expression = "1*2-3"
-  expression = "1+2*9";
+  expression = "5!";
   //expression = "1+1*(1+2)";
   //expression = "1++-+-+--+--++++---++--++--++--++--++--2"
   //expression = "3!+s3"
@@ -88,6 +88,7 @@ function Solve_Expression(expression) {
 }
 
 console.log(Solve_Expression('tien 4 2'));
+//console.log(Add_Function('funtion tien(a,b){ a+b*b }'))
 
 export { Solve_Expression, Add_Function }
 

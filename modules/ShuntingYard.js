@@ -60,7 +60,7 @@ const ShuntingYard = (infix) => {
     Object.values(infix).forEach((elem, index) => {
 
         token = elem;
-
+    
         if (isNumeric(token)) {
 
             numeros.dataStore.push(token);
@@ -121,4 +121,4 @@ const ShuntingYard = (infix) => {
 
 }
 
-export { ShuntingYard };
+export default ShuntingYard ;

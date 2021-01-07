@@ -9,80 +9,109 @@ import menor from '../../utils/menor.js';
 import resto from '../../utils/resto.js';
 import fatorial from '../../utils/fatorial.js';
 import TrocaSinal from '../../utils/trocaSinal.js';
+import tokenize from '../../utils/tokenize.js';
+import isNumeric from '../../utils/isNumeric.js';
 
 
-describe('Testing functions from folder utils',()=>{
+describe('Testing functions from folder utils', () => {
 
-    test('Division',()=>{
+    test('Division', () => {
 
-      expect(divi(4,2)).toBe(2)
+        expect(divi(4, 2)).toBe(2)
 
     })
 
-    test('Potentiation',()=>{
+    test('exponential', () => {
 
-        expect(exp(4,2)).toBe(16)
-  
+        expect(exp(4, 2)).toBe(16)
+
     })
 
-    test('Fatorial number > 1',()=>{
+    test('Fatorial number > 1', () => {
 
         expect(fatorial(4)).toBe(24)
-  
+
     })
 
-    test('Fatorial number < 1',()=>{
+    test('Fatorial number < 1', () => {
 
         expect(fatorial(0)).toBe(1)
-  
+
     })
 
-    test('Major',()=>{
+    test('Major', () => {
 
-        expect(maior(5,3)).toBe(5)
-  
+        expect(maior(5, 3)).toBe(5)
+
     })
 
-    test('Minor',()=>{
+    test('Minor', () => {
 
-        expect(menor(5,3)).toBe(3)
-  
+        expect(menor(5, 3)).toBe(3)
+
     })
 
-    test('Multiplication',()=>{
+    test('Multiplication', () => {
 
-        expect(multi(2,3)).toBe(6)
-  
+        expect(multi(2, 3)).toBe(6)
+
     })
 
-    test('Mod',()=>{
+    test('Mod', () => {
 
-        expect(resto(3,2)).toBe(1)
-  
+        expect(resto(3, 2)).toBe(1)
+
     })
 
-    test('Sum',()=>{
+    test('Sum', () => {
 
-        expect(soma(3,2)).toBe(5)
-  
+        expect(soma(3, 2)).toBe(5)
+
     })
 
-    test('Sqrt',()=>{
+    test('Sqrt', () => {
 
         expect(sqrt(4)).toBe(2)
-  
+
     })
 
-    test('Subtraction',()=>{
+    test('Subtraction', () => {
 
-        expect(subt(12,3)).toBe(9)
-  
+        expect(subt(12, 3)).toBe(9)
+
     })
-    
-    test('Change signal',()=>{
+
+    test('Change signal', () => {
 
         expect(TrocaSinal(12)).toBe(-12)
-  
+
     })
+
+    test('isNumeric', () => {
+
+        expect(isNumeric('2')).toBe(true)
+
+    })
+
+    test('!isNumeric', () => {
+
+        expect(isNumeric(2)).toBe(false);
+
+    })
+
+    test('Tokenize', () => {
+
+        expect(tokenize('funtion tien(a,b){ a+b*b }')).toStrictEqual([
+            'funtion', 'tien',
+            '(', 'a',
+            ',', 'b',
+            ')', '{',
+            'a', '+',
+            'b', '*',
+            'b', '}'
+        ]);
+
+    })
+
 
 })
