@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "jest --forceExit",
-    "test:coverage":"jest --coverage"
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",

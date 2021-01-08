@@ -1,7 +1,7 @@
 import CheckMathExpression from './modules/CheckMathExpression.js';
 import ReversePolishNotation  from './modules/ReversePolishNotation.js';
 import  ShuntingYard  from './modules/ShuntingYard.js';
-import { ResolveExpression } from './modules/ResolveExpression.js';
+import ResolveExpression  from './modules/ResolveExpression.js';
 
 import {Add_Function_List,Add_Operator,Add_Operator_List,FunctionsList} from './data/constants.js';
 
@@ -64,8 +64,8 @@ function Add_Function(functionLine) {
 function Solve_Expression(expression) {
 
   //expression = "1*2-3"
-  expression = "5!";
-  //expression = "1+1*(1+2)";
+  //expression = "5!";
+  expression = "1+1*(1+2)";
   //expression = "1++-+-+--+--++++---++--++--++--++--++--2"
   //expression = "3!+s3"
   //expression= "3!!3";
@@ -81,7 +81,6 @@ function Solve_Expression(expression) {
   const array = entrada.match(/-?[0-9]+|[A-Za-z0-9]+|\S/g);
   const name = array.shift();
 
-  console.log("Sentença Formada: ", entrada);
   console.log("Resultado aritmético da expressão: ", ResolveExpression(array, name));
   return;
 

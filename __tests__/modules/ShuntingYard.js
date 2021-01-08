@@ -14,5 +14,10 @@ describe('Testing Shunting Yard',()=>{
 
     })
 
+    test('Type parameter error',()=>{
+
+        expect(()=>ShuntingYard(( 1 + 2 ) ^ 3)).toThrow(Error);
+
+    })
 
 })

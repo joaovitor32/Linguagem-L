@@ -1,14 +1,16 @@
 import { OperatorsList } from '../data/constants.js';
 
 const ReversePolishNotation = (postfix) => {
+  
+  if(typeof postfix !== "string"){
+
+    throw new Error('Wrong parameter type')
+
+  }
 
   let expr = postfix.split(" ");
 
   let stack = [];
-
-  if (expr.length === 0) {
-    return 0;
-  }
 
   expr.forEach((elem, index) => {
 
@@ -36,6 +38,7 @@ const ReversePolishNotation = (postfix) => {
     }
 
   });
+
 
   if (stack.length > 1) {
     

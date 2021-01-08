@@ -9,10 +9,17 @@ describe('Testing Reverse Polish Notation', () => {
 
     })
 
-    test('Empty string', () => {
+    test('Parameter type error', () => {
 
-        expect(ReversePolishNotation("")).toBe(0);
+        expect(()=>ReversePolishNotation(null)).toThrow(Error);
 
     })
+
+    test('Empty input', () => {
+
+        expect(()=>ReversePolishNotation(' ')).toThrow(Error);
+
+    })
+
 
 })

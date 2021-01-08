@@ -35,23 +35,6 @@ const Tokens = {
 
     return { position, res }
   },
-
-  [string]: (argumentos) => {
-
-    let { pos, args, term } = argumentos;
-
-    let position;
-    let res;
-
-    args.push(term);
-    pos++;
-
-    position = pos;
-    res = args;
-
-    return { position, res }
-
-  },
   [integer]: (argumentos) => {
     let { pos, args, term } = argumentos;
 
@@ -98,9 +81,7 @@ function get_argument_line(array) {
       if (array[iterator] == ")") {
         pt_count--;
       }
-      if (pt_count < 0) {
-        throw new Error();
-      }
+  
       if (pt_count == 0) {
         break;
       }
@@ -109,13 +90,13 @@ function get_argument_line(array) {
     }
 
     if (iterator == array.length) {
-      throw new Error("parenteses errados!!");
+      throw new Error("Wrong quantity of parentheses");
       // quer dizer que não foi achado o mesmo número de parenteses fechados iguais aos abertos.
     }
     return new_array;
   }
   else {
-    throw new Error("sintaxe da função errada!!")
+    throw new Error("Wrong syntax of function")
     //quer dizer que não ouve abertura de parentese apos a definição da função.
   }
 }
@@ -189,7 +170,7 @@ const ResolveExpression = (array, name) => {
 
   if (pos != arg.length + 1) {
 
-    throw new SyntaxError("Número de argumentos inválidos");
+    throw new SyntaxError("Wrong number of arguments");
 
   }
 
@@ -197,4 +178,4 @@ const ResolveExpression = (array, name) => {
 }
 
 
-export { ResolveExpression };
+export default ResolveExpression ;

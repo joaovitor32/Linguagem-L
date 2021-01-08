@@ -49,6 +49,12 @@ class Stack {
 //https://en.wikipedia.org/wiki/Shunting-yard_algorithm
 const ShuntingYard = (infix) => {
 
+    if(typeof infix !== "string"){
+
+        throw new Error('Wrong parameter type')
+
+    }
+
     let stack = new Stack();
     let numeros = new Stack();
 
