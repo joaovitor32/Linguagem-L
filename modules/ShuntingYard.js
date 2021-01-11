@@ -1,7 +1,7 @@
-import { operators } from '../data/constants.js';
+import { operators } from 'mathematics-expression-solver/data/constants.js';
 
-import isNumeric from '../utils/isNumeric.js';
-import tokenize from '../utils/tokenize.js';
+import isNumeric from 'mathematics-expression-solver/utils/isNumeric.js';
+import tokenize from 'mathematics-expression-solver/utils/tokenize.js';
 
 class Stack {
     constructor() {

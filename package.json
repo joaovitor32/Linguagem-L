@@ -1,6 +1,6 @@
 {
   "name": "mathematics-expression-solver",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple math expression solver",
   "main": "index.js",
   "bin": {
@@ -16,14 +16,15 @@
     "type": "git",
     "url": "git+https://github.com/joaovitor32/mathematics-expression-solver.git"
   },
-  "author": "joaovitor32 <joaovitormunizlopes@gmail.com>",
+  "author": "joaovitor32<joaovitormunizlopes@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/joaovitor32/mathematics-expression-solver/issues"
   },
   "homepage": "https://github.com/joaovitor32/mathematics-expression-solver#readme",
   "dependencies": {
-    "require": "^2.4.20"
+    "require": "^2.4.20",
+    "semver": "^7.3.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

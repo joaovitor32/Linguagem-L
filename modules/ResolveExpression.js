@@ -1,6 +1,6 @@
-import { FunctionsList } from '../data/constants.js';
+import { FunctionsList } from 'mathematics-expression-solver/data/constants.js';
 
-import getNumberOfArguments from '../utils/getNumberOfArguments.js';
+import getNumberOfArguments from 'mathematics-expression-solver/utils/getNumberOfArguments.js';
 
 const variables = []; // vetor que ficarão as variáveis declaradas pela linguagem
 

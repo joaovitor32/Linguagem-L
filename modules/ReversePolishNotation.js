@@ -1,4 +1,4 @@
-import { OperatorsList } from '../data/constants.js';
+import { OperatorsList } from 'mathematics-expression-solver/data/constants.js';
 
 const ReversePolishNotation = (postfix) => {
   

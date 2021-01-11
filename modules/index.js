@@ -1,11 +1,11 @@
-import CheckMathExpression from './CheckMathExpression.js';
-import ReversePolishNotation  from './ReversePolishNotation.js';
-import  ShuntingYard  from './ShuntingYard.js';
-import ResolveExpression  from './ResolveExpression.js';
+import CheckMathExpression from 'mathematics-expression-solver/modules/CheckMathExpression.js';
+import ReversePolishNotation  from 'mathematics-expression-solver/modules/ReversePolishNotation.js';
+import  ShuntingYard  from 'mathematics-expression-solver/modules/ShuntingYard.js';
+import ResolveExpression  from 'mathematics-expression-solver/modules/ResolveExpression.js';
 
-import {Add_Function_List,Add_Operator,Add_Operator_List} from '../data/constants.js';
+import {Add_Function_List,Add_Operator,Add_Operator_List} from 'mathematics-expression-solver/data/constants.js';
 
-import tokenize from '../utils/tokenize.js';
+import tokenize from 'mathematics-expression-solver/utils/tokenize.js';
 
 const formEntireFunction = (str) => {
   
