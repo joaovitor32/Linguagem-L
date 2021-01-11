@@ -4,10 +4,10 @@ To clone and run this application, you'll need [Git](https://git-scm.com), [Node
   
   ```bash
 # Clone this repository
-$ git https://github.com/joaovitor32/Linguagem-L
+$ git https://github.com/joaovitor32/mathematics-expression-solver
 
 # Go into the repository
-$ cd Linguagem-L
+$ cd mathematics-expression-solver
 
 # Install dependencies
 $ npm install
@@ -18,7 +18,7 @@ $ node index.js
 ```
  **Using npm**
 
-    npm install math-expression-evaluator
+   npm i mathematics-expression-solver
     
 ## Usage
 
