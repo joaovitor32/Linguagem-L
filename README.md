@@ -23,13 +23,13 @@ $ node index.js
 ## Usage
 
 ```js
-import {Solve_Expression} from 'mathematics-expression-solver';
+ import {Solve_Expression} from 'mathematics-expression-solver';
 
  let result = Solve_Expression("1+2")
 
 ```
 ```js
-import {Add_Function,Solve_Expression} from 'mathematics-expression-solver';
+ import {Add_Function,Solve_Expression} from 'mathematics-expression-solver';
 
  Add_Function('function tien(a,b){ a^2 + b^2 }')
  let result = Solve_Expression("1 tien 2")
