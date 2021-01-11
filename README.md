@@ -29,7 +29,7 @@ import {Solve_Expression} from 'mathematics-expression-solver';
 
 ```
 ```js
-import {Add_Function} from 'mathematics-expression-solver';
+import {Add_Function,Solve_Expression} from 'mathematics-expression-solver';
 
  Add_Function('function tien(a,b){ a^2 + b^2 }')
  let result = Solve_Expression("1 tien 2")
